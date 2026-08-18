@@ -177,6 +177,32 @@
   .rules b{font-family:"Space Mono",monospace;font-size:.8rem;color:var(--pink);flex:0 0 auto}
   .rules .r2 b{color:var(--cyan)} .rules .r3 b{color:var(--gold)}
 
+  /* ---------- skripta ---------- */
+  .doc{
+    display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:18px;
+    border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);
+    text-decoration:none;color:inherit;transition:border-color .18s ease,transform .18s ease
+  }
+  .doc:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+  .doc:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+  .doc-ico{
+    flex:0 0 auto;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+    background:linear-gradient(140deg,var(--pink),var(--violet))
+  }
+  .doc-ico svg{width:22px;height:22px}
+  .doc-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .doc-txt b{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.06rem;line-height:1.25}
+  .doc-txt span{font-size:.88rem;color:var(--ink-2);line-height:1.45}
+  .doc-go{
+    flex:0 0 auto;margin-left:auto;font-family:"Space Mono",monospace;font-size:1.1rem;
+    color:var(--pink);transition:transform .18s ease
+  }
+  .doc:hover .doc-go{transform:translateX(4px)}
+  @media (max-width:520px){
+    .doc{align-items:flex-start}
+    .doc-go{display:none}
+  }
+
   /* ---------- footer ---------- */
   footer{margin-top:clamp(24px,6vw,48px);position:relative}
   .wave{display:block;width:100%;height:auto}
@@ -265,6 +291,23 @@
       <li class="r2"><b>02</b><span>Kofer ostaje kod kuće. Meka torba se spljošti i gurne pod ležaj, kofer nema gde.</span></li>
       <li class="r3"><b>03</b><span>Kapetan deli zadatke, ne mišljenja. Svako ima svoj konopac i svoju smenu.</span></li>
     </ol>
+  </section>
+
+  <section>
+    <div class="sechead"><h2 class="sec">Za buduće skipere</h2></div>
+    <a class="doc" href="https://www.dropbox.com/scl/fi/2b07bzzz0muhv03lbs4j2/skripta_za_brodicu.pdf?rlkey=lhd28jee8da41v8kdfslyfona&amp;dl=0" target="_blank" rel="noopener">
+      <span class="doc-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H14l6 6v11.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5Z"/>
+          <path d="M14 3v6h6"/><path d="M8.5 13.5h7"/><path d="M8.5 17h4.5"/>
+        </svg>
+      </span>
+      <span class="doc-txt">
+        <b>Skripta za brodicu</b>
+        <span>Gradivo za polaganje, za nas koji tek učimo da postanemo skiperi. PDF se otvara na Dropboxu.</span>
+      </span>
+      <span class="doc-go" aria-hidden="true">&rarr;</span>
+    </a>
   </section>
 
 </div>

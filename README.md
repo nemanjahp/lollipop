@@ -52,4 +52,5 @@ python3 tools/build-artifact.py
 | Marina i brod | `.facts` blokovi `Marina` i `Brod` |
 | Spisak za pakovanje | `<ul class="list">` |
 | Pravila palube | `<ol class="rules">` |
+| Link ka skripti | `<a class="doc">` u sekciji „Za buduće skipere" |
 | Boje | CSS promenljive u `:root` (svetla) i `:root[data-theme="dark"]` (tamna tema) |
