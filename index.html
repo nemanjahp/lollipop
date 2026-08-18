@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ukrcavanje Lollipop</title>
+<meta name="description" content="Odbrojavanje do ukrcavanja na jedrilicu Lollipop — subota, 26.09.2026. u 14.00.">
+</head>
+<body>
+<!--CONTENT-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Karla:wght@400;600;700&family=Space+Mono:wght@700&display=swap">
+<style>
+  :root{
+    --ground:#FFF2EE;
+    --ground-top:#FFE4EF;
+    --surface:rgba(255,255,255,.72);
+    --surface-solid:#FFFFFF;
+    --ink:#221A38;
+    --ink-2:#6B5F84;
+    --line:rgba(60,40,90,.14);
+    --line-strong:rgba(60,40,90,.24);
+    --pink:#FF2E88;
+    --orange:#FF8A3D;
+    --gold:#F5B429;
+    --lime:#3FAE63;
+    --cyan:#0FA6C4;
+    --violet:#7A5CE0;
+    --shadow:0 18px 44px -22px rgba(70,30,90,.45);
+    --seal-shadow:0 26px 60px -26px rgba(80,30,110,.55);
+    --candy:linear-gradient(90deg,var(--pink),var(--orange),var(--gold),var(--lime),var(--cyan),var(--violet));
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#070E22;
+      --ground-top:#0D1734;
+      --surface:rgba(255,255,255,.055);
+      --surface-solid:#101B39;
+      --ink:#F4ECF5;
+      --ink-2:#A79CC2;
+      --line:rgba(255,255,255,.13);
+      --line-strong:rgba(255,255,255,.24);
+      --pink:#FF5FA5;
+      --orange:#FFA05C;
+      --gold:#FFD06B;
+      --lime:#74E08F;
+      --cyan:#3ED8F2;
+      --violet:#A98CF0;
+      --shadow:0 18px 44px -20px rgba(0,0,0,.75);
+      --seal-shadow:0 30px 70px -28px rgba(0,0,0,.9);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#070E22;
+    --ground-top:#0D1734;
+    --surface:rgba(255,255,255,.055);
+    --surface-solid:#101B39;
+    --ink:#F4ECF5;
+    --ink-2:#A79CC2;
+    --line:rgba(255,255,255,.13);
+    --line-strong:rgba(255,255,255,.24);
+    --pink:#FF5FA5;
+    --orange:#FFA05C;
+    --gold:#FFD06B;
+    --lime:#74E08F;
+    --cyan:#3ED8F2;
+    --violet:#A98CF0;
+    --shadow:0 18px 44px -20px rgba(0,0,0,.75);
+    --seal-shadow:0 30px 70px -28px rgba(0,0,0,.9);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--ground);
+    background-image:linear-gradient(180deg,var(--ground-top) 0%,var(--ground) 46%,var(--ground) 100%);
+    color:var(--ink);
+    font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:clamp(28px,6vw,64px) clamp(18px,5vw,32px) 0;display:flex;flex-direction:column;gap:clamp(40px,7vw,72px)}
+
+  /* ---------- hero ---------- */
+  .hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px}
+  .seal{width:clamp(210px,44vw,308px);height:auto;filter:drop-shadow(var(--seal-shadow));animation:bob 7s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-9px) rotate(.6deg)}}
+  .eyebrow{
+    font-family:"Karla",sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-2);display:flex;align-items:center;gap:.7em;flex-wrap:wrap;justify-content:center
+  }
+  .eyebrow i{display:block;width:26px;height:3px;border-radius:2px;background:var(--candy);opacity:.9}
+  h1{
+    font-family:"Baloo 2","Karla",sans-serif;font-weight:800;
+    font-size:clamp(2.1rem,7vw,3.5rem);line-height:1.06;margin:0;letter-spacing:-.015em;text-wrap:balance;
+  }
+  h1 span{background:var(--candy);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{margin:0;max-width:53ch;color:var(--ink-2);font-size:clamp(1rem,2.4vw,1.12rem)}
+
+  /* ---------- countdown ---------- */
+  .counter{display:flex;flex-direction:column;gap:16px;align-items:center}
+  .kicker{font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.8vw,14px);width:100%}
+  .cell{
+    position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line);
+    border-radius:20px;padding:clamp(16px,3vw,22px) 6px clamp(12px,2vw,16px);text-align:center;box-shadow:var(--shadow)
+  }
+  .cell::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--candy)}
+  .num{
+    font-family:"Space Mono",ui-monospace,monospace;font-weight:700;font-variant-numeric:tabular-nums;
+    font-size:clamp(2rem,8.4vw,3.7rem);line-height:1;letter-spacing:-.03em;display:block
+  }
+  .cell:nth-child(1) .num{color:var(--pink)}
+  .cell:nth-child(2) .num{color:var(--orange)}
+  .cell:nth-child(3) .num{color:var(--cyan)}
+  .cell:nth-child(4) .num{color:var(--violet)}
+  .unit{display:block;margin-top:10px;font-weight:700;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
+  .stamp{
+    font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.06em;color:var(--ink-2);
+    text-align:center;display:flex;gap:.9em;flex-wrap:wrap;justify-content:center
+  }
+  .stamp b{color:var(--ink);font-weight:700}
+  .aboard{
+    display:none;text-align:center;padding:30px 22px;border-radius:24px;border:1px solid var(--line);
+    background:var(--surface);box-shadow:var(--shadow)
+  }
+  .aboard h2{font-family:"Baloo 2",sans-serif;font-size:clamp(1.6rem,6vw,2.6rem);margin:0 0 6px}
+  body.docked .grid,body.docked .stamp{display:none}
+  body.docked .aboard{display:block}
+
+  /* ---------- facts ---------- */
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.8vw,14px)}
+  .fact{padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:var(--surface)}
+  .fact dt{font-weight:700;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin:0 0 4px}
+  .fact dd{margin:0;font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.02rem;line-height:1.3}
+
+  /* ---------- sections ---------- */
+  section{display:flex;flex-direction:column;gap:18px}
+  h2.sec{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.5rem,4.4vw,2rem);margin:0;letter-spacing:-.01em}
+  .sechead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);padding-bottom:12px}
+  .tally{font-family:"Space Mono",monospace;font-size:.82rem;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* ---------- checklist ---------- */
+  .list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .item{
+    width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;cursor:pointer;
+    font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);
+    border-radius:14px;padding:13px 15px;transition:border-color .18s ease,background .18s ease,transform .18s ease
+  }
+  .item:hover{border-color:var(--line-strong);transform:translateY(-1px)}
+  .item:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+  .box{
+    flex:0 0 auto;width:21px;height:21px;border-radius:50%;border:2px solid var(--line-strong);
+    display:grid;place-items:center;margin-top:2px;transition:background .18s ease,border-color .18s ease
+  }
+  .box svg{width:12px;height:12px;opacity:0;transform:scale(.5);transition:opacity .18s ease,transform .18s ease}
+  .item[aria-pressed="true"]{background:transparent;border-style:dashed}
+  .item[aria-pressed="true"] .box{background:var(--lime);border-color:var(--lime)}
+  .item[aria-pressed="true"] .box svg{opacity:1;transform:scale(1)}
+  .item[aria-pressed="true"] .txt{color:var(--ink-2);text-decoration:line-through;text-decoration-thickness:1px}
+
+  /* ---------- rules ---------- */
+  .rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .rules li{display:flex;gap:16px;align-items:baseline;padding:14px 2px;border-bottom:1px dashed var(--line)}
+  .rules li:last-child{border-bottom:0}
+  .rules b{font-family:"Space Mono",monospace;font-size:.8rem;color:var(--pink);flex:0 0 auto}
+  .rules .r2 b{color:var(--cyan)} .rules .r3 b{color:var(--gold)}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:clamp(24px,6vw,48px);position:relative}
+  .wave{display:block;width:100%;height:auto}
+  .signoff{
+    background:#0A3560;text-align:center;padding:8px 20px 34px;margin-top:-1px;
+    display:flex;flex-direction:column;gap:6px;align-items:center
+  }
+  .signoff p{margin:0;font-family:"Baloo 2",sans-serif;font-weight:700;color:#FFF;font-size:clamp(1.05rem,3.4vw,1.35rem)}
+  .signoff small{color:rgba(255,255,255,.62);font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.14em}
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  @media (max-width:620px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .facts{grid-template-columns:1fr}
+    .list{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .seal{animation:none}
+    *{transition-duration:.01ms !important}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <svg class="seal" viewBox="0 0 400 400" role="img" aria-label="Znak jedrilice Lollipop: jedrilica sa lizalicom na jedru u krugu od šarenog konopca">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#A88BE0"/><stop offset=".26" stop-color="#E28FC6"/>
+          <stop offset=".54" stop-color="#FF9E9E"/><stop offset=".8" stop-color="#FFC077"/>
+          <stop offset="1" stop-color="#FFDFA6"/>
+        </linearGradient>
+        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3E97CC"/><stop offset=".35" stop-color="#14639E"/>
+          <stop offset="1" stop-color="#07264A"/>
+        </linearGradient>
+        <linearGradient id="rope" gradientUnits="userSpaceOnUse" x1="60" y1="40" x2="340" y2="360">
+          <stop offset="0" stop-color="#FF5FA2"/><stop offset=".14" stop-color="#C77DE8"/>
+          <stop offset=".29" stop-color="#7B8CE8"/><stop offset=".44" stop-color="#3FC6DE"/>
+          <stop offset=".59" stop-color="#6FD98A"/><stop offset=".74" stop-color="#FFD166"/>
+          <stop offset=".88" stop-color="#FF9A55"/><stop offset="1" stop-color="#FF5FA2"/>
+        </linearGradient>
+        <linearGradient id="swirl" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#FF2E88"/><stop offset=".3" stop-color="#FF8A3D"/>
+          <stop offset=".55" stop-color="#FFD166"/><stop offset=".78" stop-color="#4CC98A"/>
+          <stop offset="1" stop-color="#2FB3E8"/>
+        </linearGradient>
+        <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#FFF8DC"/><stop offset=".6" stop-color="#FFDD97"/>
+          <stop offset="1" stop-color="#FFB870"/>
+        </radialGradient>
+        <clipPath id="scene"><circle cx="200" cy="200" r="152"/></clipPath>
+        <clipPath id="jibclip"><path d="M183,114 L183,244 L290,242 C254,200 218,156 183,114 Z"/></clipPath>
+      </defs>
+
+      <circle cx="200" cy="200" r="159" fill="#FFFFFF"/>
+
+      <g clip-path="url(#scene)">
+        <rect x="40" y="40" width="320" height="320" fill="url(#sky)"/>
+        <ellipse cx="118" cy="128" rx="34" ry="11" fill="#FFFFFF" opacity=".34"/>
+        <ellipse cx="272" cy="106" rx="26" ry="8" fill="#FFFFFF" opacity=".26"/>
+        <g stroke="#5B4A86" stroke-width="2" fill="none" stroke-linecap="round" opacity=".55">
+          <path d="M286,120 q6,-5 12,0"/><path d="M304,136 q6,-5 12,0"/><path d="M276,146 q5,-4 10,0"/>
+        </g>
+        <circle cx="306" cy="261" r="25" fill="url(#sun)"/>
+        <rect x="40" y="268" width="320" height="92" fill="url(#sea)"/>
+        <g fill="#FFD9A6" opacity=".55">
+          <rect x="292" y="278" width="28" height="3" rx="1.5"/>
+          <rect x="296" y="288" width="20" height="3" rx="1.5"/>
+          <rect x="290" y="298" width="32" height="3" rx="1.5"/>
+        </g>
+
+        <g transform="translate(-20,0)">
+        <!-- jedra -->
+        <line x1="177" y1="248" x2="177" y2="94" stroke="#2A2540" stroke-width="4" stroke-linecap="round"/>
+        <path d="M175,100 L175,246 L86,248 Q104,156 175,100 Z" fill="#FDFBFF" stroke="#E3D8EA" stroke-width="1.5" stroke-linejoin="round"/>
+        <g clip-path="url(#jibclip)">
+          <rect x="177" y="114" width="120" height="23" fill="#FF5FA2"/>
+          <rect x="177" y="136" width="120" height="23" fill="#FF9A55"/>
+          <rect x="177" y="158" width="120" height="23" fill="#FFD166"/>
+          <rect x="177" y="180" width="120" height="23" fill="#6FD98A"/>
+          <rect x="177" y="202" width="120" height="23" fill="#4FC3E8"/>
+          <rect x="177" y="224" width="120" height="23" fill="#B08CE8"/>
+        </g>
+        <path d="M183,114 L183,244 L290,242 C254,200 218,156 183,114 Z" fill="none" stroke="#E3D8EA" stroke-width="1.5" stroke-linejoin="round"/>
+        <line x1="181" y1="108" x2="298" y2="244" stroke="#2A2540" stroke-width="1.6" opacity=".7"/>
+        <line x1="177" y1="246" x2="86" y2="248" stroke="#2A2540" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- lizalica na glavnom jedru -->
+        <g transform="translate(139,187) scale(.88)">
+          <line x1="0" y1="30" x2="10" y2="66" stroke="#F2E4EC" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="0" cy="0" r="41" fill="#FFFFFF"/>
+          <path d="M0,0 A6,6 0 0 1 12,0 A12,12 0 0 1 -12,0 A18,18 0 0 1 24,0 A24,24 0 0 1 -24,0 A30,30 0 0 1 36,0"
+                fill="none" stroke="url(#swirl)" stroke-width="11.5" stroke-linecap="round"/>
+        </g>
+
+        <!-- posada -->
+        <g>
+          <g transform="translate(126,0)"><circle cx="0" cy="218" r="6.5" fill="#3A2E2A"/><rect x="-9.5" y="226" width="19" height="26" rx="8" fill="#35B6C9"/></g>
+          <g transform="translate(156,0)"><circle cx="0" cy="216" r="6.5" fill="#2E2320"/><rect x="-9.5" y="224" width="19" height="28" rx="8" fill="#E0559B"/></g>
+          <g transform="translate(196,0)"><circle cx="0" cy="219" r="6.5" fill="#4A3728"/><rect x="-9.5" y="227" width="19" height="25" rx="8" fill="#F2C14E"/></g>
+          <g transform="translate(226,0)"><circle cx="0" cy="215" r="6.5" fill="#241C1A"/><rect x="-9.5" y="223" width="19" height="29" rx="8" fill="#2E3247"/></g>
+          <g transform="translate(256,0)"><circle cx="0" cy="217" r="6.5" fill="#3A2E2A"/><rect x="-9.5" y="225" width="19" height="27" rx="8" fill="#6FC98A"/></g>
+        </g>
+
+        <!-- trup -->
+        <path d="M92,248 L308,242 C302,268 276,286 242,288 L142,288 C114,286 96,270 92,248 Z"
+              fill="#FFFFFF" stroke="#E6DAEA" stroke-width="1.5" stroke-linejoin="round"/>
+        <g transform="rotate(-1.6 200 268)" font-family="'Baloo 2', sans-serif" font-weight="800" font-size="27" text-anchor="middle">
+          <text x="192" y="277" letter-spacing="1">
+            <tspan fill="#FF2E88">L</tspan><tspan fill="#FF8A3D">O</tspan><tspan fill="#F5B429">L</tspan><tspan fill="#7CC24B">L</tspan><tspan fill="#2FB3E8">I</tspan><tspan fill="#4C8BE8">P</tspan><tspan fill="#8B6FE8">O</tspan><tspan fill="#E356A8">P</tspan>
+          </text>
+          <g transform="translate(288,268) scale(.9)">
+            <circle cx="0" cy="0" r="12" fill="#FFFFFF" stroke="#F0DFEA" stroke-width="1"/>
+            <path d="M0,0 A2.4,2.4 0 0 1 4.8,0 A4.8,4.8 0 0 1 -4.8,0 A7.2,7.2 0 0 1 9.6,0" fill="none" stroke="#FF2E88" stroke-width="3.4" stroke-linecap="round"/>
+          </g>
+        </g>
+
+        <!-- pena i talasi -->
+        <g fill="#FFFFFF" opacity=".85">
+          <path d="M84,282 c14,-10 30,-4 38,6 c-18,8 -34,4 -38,-6 Z"/>
+          <path d="M312,276 c-16,-8 -34,-2 -40,10 c20,8 38,2 40,-10 Z"/>
+        </g>
+        </g>
+
+        <g stroke="#BFE3F5" stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".55">
+          <path d="M56,308 q16,-8 32,0 t32,0"/><path d="M248,314 q16,-8 32,0 t32,0"/>
+          <path d="M96,330 q18,-9 36,0 t36,0"/><path d="M196,344 q18,-9 36,0 t36,0"/>
+        </g>
+      </g>
+
+      <!-- konopac -->
+      <circle cx="200" cy="200" r="170" fill="none" stroke="url(#rope)" stroke-width="20"/>
+      <circle cx="200" cy="200" r="170" fill="none" stroke="#FFFFFF" stroke-opacity=".45" stroke-width="20" stroke-dasharray="2.6 12"/>
+      <circle cx="200" cy="200" r="180.5" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+      <circle cx="200" cy="200" r="159.5" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+      <g transform="translate(200,370)">
+        <path d="M-7,0 C-24,13 -33,25 -31,39" fill="none" stroke="url(#rope)" stroke-width="12" stroke-linecap="round"/>
+        <path d="M7,0 C24,13 33,25 31,39" fill="none" stroke="url(#rope)" stroke-width="12" stroke-linecap="round"/>
+        <path d="M-7,0 C-24,13 -33,25 -31,39" fill="none" stroke="#FFFFFF" stroke-opacity=".4" stroke-width="12" stroke-dasharray="2.4 10"/>
+        <path d="M7,0 C24,13 33,25 31,39" fill="none" stroke="#FFFFFF" stroke-opacity=".4" stroke-width="12" stroke-dasharray="2.4 10"/>
+        <rect x="-19" y="-14" width="38" height="29" rx="13" fill="url(#rope)" stroke="#FFFFFF" stroke-width="2.5"/>
+        <g stroke="#FFFFFF" stroke-opacity=".45" stroke-width="2.4" stroke-linecap="round">
+          <line x1="-8" y1="-10" x2="-11" y2="11"/><line x1="1" y1="-11" x2="-2" y2="12"/><line x1="10" y1="-10" x2="7" y2="11"/>
+        </g>
+      </g>
+    </svg>
+
+    <p class="eyebrow"><i></i> Jedrilica Lollipop · Isplovljavanje 2026 <i></i></p>
+    <h1>Gospodo, <span>odbrojavanje je počelo</span></h1>
+    <p class="lede">Ukrcavanje je u subotu, 26. septembra, tačno u 14.00. Do tada spakujte torbe, naspavajte se i uskladite prevoz. More ne pomera termin, a kapetan ne čeka.</p>
+  </header>
+
+  <div class="counter">
+    <p class="kicker">Do ukrcavanja</p>
+    <div class="grid" id="grid" aria-hidden="true">
+      <div class="cell"><span class="num" id="d">--</span><span class="unit">Dana</span></div>
+      <div class="cell"><span class="num" id="h">--</span><span class="unit">Sati</span></div>
+      <div class="cell"><span class="num" id="m">--</span><span class="unit">Minuta</span></div>
+      <div class="cell"><span class="num" id="s">--</span><span class="unit">Sekundi</span></div>
+    </div>
+    <p class="sr" id="live" aria-live="polite"></p>
+    <p class="stamp"><span>26.09.2026.</span><b>14.00</b><span>CEST · Beograd</span></p>
+    <div class="aboard">
+      <h2>Ukrcavanje je počelo!</h2>
+      <p>Gospodo, konopci se odvezuju. Na palubu.</p>
+    </div>
+  </div>
+
+  <dl class="facts">
+    <div class="fact"><dt>Datum</dt><dd>Subota, 26.09.2026.</dd></div>
+    <div class="fact"><dt>Ukrcavanje</dt><dd>14.00 h, tačno</dd></div>
+    <div class="fact"><dt>Marina</dt><dd>Javljam čim se potvrdi</dd></div>
+  </dl>
+
+  <section>
+    <div class="sechead">
+      <h2 class="sec">Spremite se</h2>
+      <p class="tally" id="tally">0 / 10 spremno</p>
+    </div>
+    <ul class="list" id="list">
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Lična karta i pasoš, provereni rokovi</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Patike sa belim đonom — bez crnih tragova po palubi</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Meka torba, kofer ostaje kod kuće</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Krema za sunčanje i naočare za sunce</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Vetrovka i nešto toplo — noći su na vodi hladnije</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Tablete protiv morske bolesti</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Powerbank i kabl — utičnica na brodu je retka roba</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Kapa, šorc, papuče i kupaći</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Dva peškira, ne jedan</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Gotovina za marine, pijacu i konobe</span></button></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sechead"><h2 class="sec">Pravila palube</h2></div>
+    <ol class="rules">
+      <li class="r1"><b>01</b><span>Na brod se ne kasni. Ni pet minuta — vez se plaća po satu, a plima se ne dogovara.</span></li>
+      <li class="r2"><b>02</b><span>Kofer ostaje kod kuće. Meka torba se spljošti i gurne pod ležaj, kofer nema gde.</span></li>
+      <li class="r3"><b>03</b><span>Kapetan deli zadatke, ne mišljenja. Svako ima svoj konopac i svoju smenu.</span></li>
+    </ol>
+  </section>
+
+</div>
+
+<footer>
+  <svg class="wave" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,58 C110,18 210,18 320,54 C430,90 530,92 650,60 C770,28 880,26 990,54 C1080,77 1150,78 1200,64 L1200,110 L0,110 Z" fill="#0E4C7E"/>
+    <path d="M0,74 C120,44 220,44 330,72 C440,100 540,100 660,76 C780,52 890,52 1000,72 C1090,88 1150,88 1200,80 L1200,110 L0,110 Z" fill="#0A3560"/>
+  </svg>
+  <div class="signoff">
+    <p>Vetar u leđa, gospodo. Vidimo se na palubi.</p>
+    <small>LOLLIPOP · 26.09.2026 · 14.00</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var TARGET = Date.parse("2026-09-26T14:00:00+02:00");
+  var d = document.getElementById("d"), h = document.getElementById("h"),
+      m = document.getElementById("m"), s = document.getElementById("s"),
+      live = document.getElementById("live"), lastSaid = -1;
+
+  function pad(n){ return n < 10 ? "0" + n : String(n); }
+
+  function tick(){
+    var left = TARGET - Date.now();
+    if (left <= 0){ document.body.classList.add("docked"); live.textContent = "Ukrcavanje je počelo."; return; }
+    var t = Math.floor(left / 1000);
+    var days = Math.floor(t / 86400), hrs = Math.floor(t % 86400 / 3600),
+        min = Math.floor(t % 3600 / 60), sec = t % 60;
+    d.textContent = String(days); h.textContent = pad(hrs);
+    m.textContent = pad(min); s.textContent = pad(sec);
+    if (days !== lastSaid){
+      lastSaid = days;
+      live.textContent = "Još " + days + " dana do ukrcavanja.";
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  var items = Array.prototype.slice.call(document.querySelectorAll(".item"));
+  var tally = document.getElementById("tally");
+  function count(){
+    var n = items.filter(function(b){ return b.getAttribute("aria-pressed") === "true"; }).length;
+    tally.textContent = n + " / " + items.length + " spremno";
+  }
+  items.forEach(function(b){
+    b.addEventListener("click", function(){
+      b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true");
+      count();
+    });
+  });
+  count();
+})();
+</script>
+<!--/CONTENT-->
+</body>
+</html>
