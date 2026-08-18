@@ -129,10 +129,16 @@
   body.docked .aboard{display:block}
 
   /* ---------- facts ---------- */
-  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.8vw,14px)}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:clamp(8px,1.8vw,14px)}
   .fact{padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:var(--surface)}
   .fact dt{font-weight:700;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin:0 0 4px}
-  .fact dd{margin:0;font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.02rem;line-height:1.3}
+  .fact dd{margin:0;font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.02rem;line-height:1.3;
+    display:flex;flex-direction:column;gap:2px}
+  .fact .sub{font-family:"Karla",sans-serif;font-weight:400;font-size:.82rem;color:var(--ink-2)}
+  .fact a{font-family:"Karla",sans-serif;font-weight:600;font-size:.82rem;color:var(--pink);
+    text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  .fact a:hover{color:var(--violet)}
+  .fact a:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:3px}
 
   /* ---------- sections ---------- */
   section{display:flex;flex-direction:column;gap:18px}
@@ -315,9 +321,9 @@
       </g>
     </svg>
 
-    <p class="eyebrow"><i></i> Jedrilica Lollipop · Isplovljavanje 2026 <i></i></p>
+    <p class="eyebrow"><i></i> Jedrilica Lollipop · Nikiana, Lefkada 2026 <i></i></p>
     <h1>Gospodo, <span>odbrojavanje je počelo</span></h1>
-    <p class="lede">Ukrcavanje je u subotu, 26. septembra, tačno u 14.00. Do tada spakujte torbe, naspavajte se i uskladite prevoz. More ne pomera termin, a kapetan ne čeka.</p>
+    <p class="lede">Bavaria 50 nas čeka u Nikiani na Lefkadi, u subotu 26. septembra, tačno u 14.00 po grčkom satu — to je 13.00 kod kuće. Do tada spakujte torbe, uskladite letove i naspavajte se. More ne pomera termin, a kapetan ne čeka.</p>
   </header>
 
   <div class="counter">
@@ -329,23 +335,24 @@
       <div class="cell"><span class="num" id="s">--</span><span class="unit">Sekundi</span></div>
     </div>
     <p class="sr" id="live" aria-live="polite"></p>
-    <p class="stamp"><span>26.09.2026.</span><b>14.00</b><span>CEST · Beograd</span></p>
+    <p class="stamp"><span>26.09.2026.</span><b>14.00</b><span>u Nikiani (EEST)</span><span>·</span><span>13.00 kod kuće (CEST)</span></p>
     <div class="aboard">
       <h2>Ukrcavanje je počelo!</h2>
-      <p>Gospodo, konopci se odvezuju. Na palubu.</p>
+      <p>Gospodo, konopci se odvezuju u Nikiani. Na palubu.</p>
     </div>
   </div>
 
   <dl class="facts">
     <div class="fact"><dt>Datum</dt><dd>Subota, 26.09.2026.</dd></div>
-    <div class="fact"><dt>Ukrcavanje</dt><dd>14.00 h, tačno</dd></div>
-    <div class="fact"><dt>Marina</dt><dd>Javljam čim se potvrdi</dd></div>
+    <div class="fact"><dt>Ukrcavanje</dt><dd>14.00 h, tačno<span class="sub">13.00 po našem satu</span></dd></div>
+    <div class="fact"><dt>Marina</dt><dd>Nikiana, Lefkada<span class="sub">Jonsko more, Grčka</span></dd></div>
+    <div class="fact"><dt>Brod</dt><dd>Bavaria 50 — 5 kabina<a href="https://seasail.eu/index.php/our-fleet/5-cabins/bavaria-50-lolipop" target="_blank" rel="noopener">Specifikacija broda</a></dd></div>
   </dl>
 
   <section>
     <div class="sechead">
       <h2 class="sec">Spremite se</h2>
-      <p class="tally" id="tally">0 / 10 spremno</p>
+      <p class="tally" id="tally">0 / 12 spremno</p>
     </div>
     <ul class="list" id="list">
       <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Lična karta i pasoš, provereni rokovi</span></button></li>
@@ -357,14 +364,16 @@
       <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Powerbank i kabl — utičnica na brodu je retka roba</span></button></li>
       <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Kapa, šorc, papuče i kupaći</span></button></li>
       <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Dva peškira, ne jedan</span></button></li>
-      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Gotovina za marine, pijacu i konobe</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Gotovina u evrima za marine, pijacu i konobe</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Prevoz do Lefkade i transfer do Nikiane — rezervisan</span></button></li>
+      <li><button class="item" type="button" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Sat pomeren za sat unapred — Grčka je ispred nas</span></button></li>
     </ul>
   </section>
 
   <section>
     <div class="sechead"><h2 class="sec">Pravila palube</h2></div>
     <ol class="rules">
-      <li class="r1"><b>01</b><span>Na brod se ne kasni. Ni pet minuta — vez se plaća po satu, a plima se ne dogovara.</span></li>
+      <li class="r1"><b>01</b><span>Na brod se ne kasni. Ni pet minuta — prijava, briefing i pazar idu jedno za drugim, a marina nas ne čeka.</span></li>
       <li class="r2"><b>02</b><span>Kofer ostaje kod kuće. Meka torba se spljošti i gurne pod ležaj, kofer nema gde.</span></li>
       <li class="r3"><b>03</b><span>Kapetan deli zadatke, ne mišljenja. Svako ima svoj konopac i svoju smenu.</span></li>
     </ol>
@@ -379,13 +388,13 @@
   </svg>
   <div class="signoff">
     <p>Vetar u leđa, gospodo. Vidimo se na palubi.</p>
-    <small>LOLLIPOP · 26.09.2026 · 14.00</small>
+    <small>LOLLIPOP · NIKIANA, LEFKADA · 26.09.2026 · 14.00</small>
   </div>
 </footer>
 
 <script>
 (function(){
-  var TARGET = Date.parse("2026-09-26T14:00:00+02:00");
+  var TARGET = Date.parse("2026-09-26T14:00:00+03:00"); // 14.00 po lokalnom vremenu u Nikiani (EEST)
   var d = document.getElementById("d"), h = document.getElementById("h"),
       m = document.getElementById("m"), s = document.getElementById("s"),
       live = document.getElementById("live"), lastSaid = -1;
