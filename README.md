@@ -1,11 +1,48 @@
 # Ukrcavanje Lollipop
 
-Odbrojavanje do ukrcavanja na jedrilicu **Lollipop** (Bavaria 50, 5 kabina) u marini **Nikiana, Lefkada** — subota, 26.09.2026. u 14.00.
+Odbrojavanje do ukrcavanja na jedrilicu **Lollipop** (Bavaria 50, 5 kabina) u marini
+**Nikiana, Lefkada** — subota, **26.09.2026. u 14.00**.
 
-Brojač je vezan za `2026-09-26T14:00:00+03:00`, tj. 14.00 po lokalnom vremenu u Nikiani (EEST), što je 13.00 po CEST-u. Radi isto bez obzira odakle se stranica otvara.
+Brojač je vezan za `2026-09-26T14:00:00+03:00`, tj. 14.00 po lokalnom vremenu u Nikiani
+(EEST), što je 13.00 po CEST-u. Radi isto bez obzira odakle se stranica otvara.
 
-- `index.html` — cela stranica, jedan fajl, bez ikakvih zavisnosti. Otvori u pregledaču.
-- `artifact.html` — isti sadržaj bez `<html>/<head>/<body>` omotača, za objavljivanje kao Artifact.
+## Pokretanje lokalno
+
+```bash
+npm start          # http://localhost:3000
+```
+
+Nema nijedne zavisnosti — `server.js` je običan Node static server. Može i samo
+otvaranjem `index.html` u pregledaču.
+
+## Deploy na Railway
+
+Repo je spreman kakav jeste:
+
+1. Na Railway-u: **New Project → Deploy from GitHub repo → `nemanjahp/lollipop`**
+2. Grana: `claude/sailing-boarding-counter-u5qoto` (ili `main` posle merge-a)
+3. Bez ijedne env promenljive — `PORT` Railway ubacuje sam, server ga čita
+4. **Settings → Networking → Generate Domain** za javni link
+
+Nixpacks prepoznaje `package.json` i pokreće `npm start`; `railway.json` to i eksplicitno
+zadaje, zajedno sa restartom pri padu.
+
+## Fajlovi
+
+| Fajl | Šta je |
+| --- | --- |
+| `index.html` | cela stranica — markup, CSS i JS u jednom fajlu |
+| `logo.png` / `logo.webp` | originalni znak, bela pozadina isečena da radi i na tamnoj temi |
+| `server.js` | static server za Railway, bez zavisnosti |
+| `railway.json`, `package.json` | deploy konfiguracija |
+| `artifact.html` | ista stranica kao jedan fajl sa ugrađenim logom, za claude.ai Artifact |
+| `tools/build-artifact.py` | generiše `artifact.html` iz `index.html` |
+
+`artifact.html` se ne menja ručno — posle svake izmene `index.html`:
+
+```bash
+python3 tools/build-artifact.py
+```
 
 ## Šta se lako menja
 
@@ -15,7 +52,4 @@ Brojač je vezan za `2026-09-26T14:00:00+03:00`, tj. 14.00 po lokalnom vremenu u
 | Marina i brod | `.facts` blokovi `Marina` i `Brod` |
 | Spisak za pakovanje | `<ul class="list">` |
 | Pravila palube | `<ol class="rules">` |
-| Boje | CSS promenljive u `:root` (svetla tema) i `:root[data-theme="dark"]` |
-
-Znak je crtan kao inline SVG, pa se skalira bez gubitka kvaliteta i radi bez ijednog eksternog fajla.
-Ako želiš originalni PNG umesto crtanog znaka, ubaci ga u repo i zameni `<svg class="seal">` sa `<img class="seal" src="logo.png" alt="Lollipop">`.
+| Boje | CSS promenljive u `:root` (svetla) i `:root[data-theme="dark"]` (tamna tema) |

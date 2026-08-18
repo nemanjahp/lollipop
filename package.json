@@ -1,0 +1,12 @@
+{
+  "name": "lollipop-odbrojavanje",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Odbrojavanje do ukrcavanja na jedrilicu Lollipop — Nikiana, Lefkada, 26.09.2026.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
