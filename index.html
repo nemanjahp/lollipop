@@ -74,6 +74,8 @@
   }
 
   *{box-sizing:border-box}
+  /* hidden atribut mora da nadjaca display iz pravila ispod */
+  [hidden]{display:none !important}
   body{
     margin:0;
     background:var(--ground);
@@ -148,7 +150,7 @@
   /* ---------- sections ---------- */
   section{display:flex;flex-direction:column;gap:18px}
   h2.sec{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.5rem,4.4vw,2rem);margin:0;letter-spacing:-.01em}
-  .sechead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  .sechead{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
     border-bottom:1px solid var(--line);padding-bottom:12px}
   .tally{display:flex;align-items:baseline;gap:14px;font-family:"Space Mono",monospace;font-size:.82rem;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
 
@@ -160,6 +162,20 @@
   .reset:hover{color:var(--violet)}
   .reset:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:3px}
   .saved{margin:0;font-size:.82rem;color:var(--ink-2)}
+  .ja{
+    display:flex;align-items:center;gap:8px;font-family:"Karla",sans-serif;
+    font-size:.8rem;color:var(--ink-2);white-space:nowrap
+  }
+  .ja input{
+    font:inherit;font-size:.86rem;color:var(--ink);background:var(--surface);
+    border:1px solid var(--line-strong);border-radius:9px;padding:5px 10px;
+    width:8.5em;max-width:100%;min-width:0
+  }
+  .ja input:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+  .ko{
+    display:inline-block;font-family:"Space Mono",monospace;
+    font-size:.7rem;letter-spacing:.02em;color:var(--lime)
+  }
 
   /* ---------- checklist ---------- */
   .list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
@@ -179,6 +195,7 @@
   .item[aria-pressed="true"] .box{background:var(--lime);border-color:var(--lime)}
   .item[aria-pressed="true"] .box svg{opacity:1;transform:scale(1)}
   .item .txt b{font-weight:700}
+  .telo{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
   .item[aria-pressed="true"] .txt{color:var(--ink-2);text-decoration:line-through;text-decoration-thickness:1px}
 
   /* ---------- rules ---------- */
@@ -279,26 +296,29 @@
     <div class="sechead">
       <h2 class="sec">Spremite se</h2>
       <p class="tally"><span id="tally">0 / 16 spremno</span><button class="reset" id="reset" type="button" hidden>Poništi sve</button></p>
+      <label class="ja" id="jaBox" hidden>Potpiši se:
+        <input id="ime" type="text" maxlength="24" placeholder="tvoje ime" autocomplete="nickname" spellcheck="false">
+      </label>
     </div>
     <ul class="list" id="list">
-      <li><button class="item" type="button" data-id="licna-karta-i-pasos" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Lična karta i pasoš, provereni rokovi</span></button></li>
-      <li><button class="item" type="button" data-id="patike-sa-belim-donom" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Patike sa belim đonom — bez crnih tragova po palubi</span></button></li>
-      <li><button class="item" type="button" data-id="meka-torba-kofer-ostaje" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Meka torba, kofer ostaje kod kuće</span></button></li>
-      <li><button class="item" type="button" data-id="krema-za-suncanje-i" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Krema za sunčanje i naočare za sunce</span></button></li>
-      <li><button class="item" type="button" data-id="vetrovka-i-nesto-toplo" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Vetrovka i nešto toplo — noći su na vodi hladnije</span></button></li>
-      <li><button class="item" type="button" data-id="rukavice-sa-otvorenim-prstima" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Rukavice sa otvorenim prstima</span></button></li>
-      <li><button class="item" type="button" data-id="powerbank-i-kabl" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Powerbank i kabl</span></button></li>
-      <li><button class="item" type="button" data-id="kapa-sorc-papuce-i" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Kapa, šorc, papuče i kupaći</span></button></li>
-      <li><button class="item" type="button" data-id="dva-mikrofiber-peskira-ne" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Dva mikrofiber peškira, ne jedan</span></button></li>
-      <li><button class="item" type="button" data-id="gotovina-u-evrima-za" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Gotovina u evrima za marine, pijacu i konobe</span></button></li>
-      <li><button class="item" type="button" data-id="sat-pomeren-za-sat" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Sat pomeren za sat unapred — Grčka je ispred nas</span></button></li>
-      <li><button class="item" type="button" data-id="vlada-da-spremi-opremu" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt"><b>Vlada</b> da spremi opremu za ribolov</span></button></li>
-      <li><button class="item" type="button" data-id="skrba-da-ponese-motorole" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt"><b>Škrba</b> da ponese motorole</span></button></li>
-      <li><button class="item" type="button" data-id="peda-da-ponese-zacine" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt"><b>Peđa</b> da ponese začine</span></button></li>
-      <li><button class="item" type="button" data-id="10-litara-rakije" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">10 litara rakije</span></button></li>
-      <li><button class="item" type="button" data-id="5-kila-suvog-mesa" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">5 kila suvog mesa</span></button></li>
+      <li><button class="item" type="button" data-id="licna-karta-i-pasos" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Lična karta i pasoš, provereni rokovi</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="patike-sa-belim-donom" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Patike sa belim đonom — bez crnih tragova po palubi</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="meka-torba-kofer-ostaje" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Meka torba, kofer ostaje kod kuće</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="krema-za-suncanje-i" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Krema za sunčanje i naočare za sunce</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="vetrovka-i-nesto-toplo" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Vetrovka i nešto toplo — noći su na vodi hladnije</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="rukavice-sa-otvorenim-prstima" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Rukavice sa otvorenim prstima</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="powerbank-i-kabl" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Powerbank i kabl</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="kapa-sorc-papuce-i" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Kapa, šorc, papuče i kupaći</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="dva-mikrofiber-peskira-ne" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Dva mikrofiber peškira, ne jedan</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="gotovina-u-evrima-za" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Gotovina u evrima za marine, pijacu i konobe</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="sat-pomeren-za-sat" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">Sat pomeren za sat unapred — Grčka je ispred nas</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="vlada-da-spremi-opremu" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt"><b>Vlada</b> da spremi opremu za ribolov</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="skrba-da-ponese-motorole" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt"><b>Škrba</b> da ponese motorole</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="peda-da-ponese-zacine" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt"><b>Peđa</b> da ponese začine</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="10-litara-rakije" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">10 litara rakije</span><small class="ko" hidden></small></span></button></li>
+      <li><button class="item" type="button" data-id="5-kila-suvog-mesa" aria-pressed="false"><span class="box"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0B2A14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="telo"><span class="txt">5 kila suvog mesa</span><small class="ko" hidden></small></span></button></li>
     </ul>
-    <p class="saved" id="saved" hidden>Štiklirano se pamti u ovom pregledaču, na ovom uređaju — svako vodi svoj spisak.</p>
+    <p class="saved" id="saved" hidden></p>
   </section>
 
   <section>
@@ -369,51 +389,155 @@
   var tally = document.getElementById("tally");
   var reset = document.getElementById("reset");
   var saved = document.getElementById("saved");
+  var jaBox = document.getElementById("jaBox");
+  var poljeIme = document.getElementById("ime");
   var KLJUC = "lollipop-spisak-v1";
+  var KLJUC_IME = "lollipop-ime";
 
-  // localStorage ume da pukne (privatni režim, ugrađen okvir, isključeni kolačići).
-  // Tada stranica radi isto, samo bez pamćenja.
-  function citaj(){
-    try { return JSON.parse(localStorage.getItem(KLJUC)) || {}; }
-    catch (e) { return {}; }
-  }
-  function pisi(stanje){
-    try { localStorage.setItem(KLJUC, JSON.stringify(stanje)); return true; }
-    catch (e) { return false; }
-  }
+  // localStorage ume da pukne (privatni režim, ugrađen okvir, iskljuceni kolačići).
+  function citaj(k){ try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function pisi(k, v){ try { localStorage.setItem(k, v); } catch (e) {} }
   var pamti = (function(){
     try { localStorage.setItem(KLJUC + "-proba", "1"); localStorage.removeItem(KLJUC + "-proba"); return true; }
     catch (e) { return false; }
   })();
 
-  function count(){
-    var n = items.filter(function(b){ return b.getAttribute("aria-pressed") === "true"; }).length;
-    tally.textContent = n + " / " + items.length + " spremno";
-    if (pamti) reset.hidden = n === 0;
+  // stanje[id] = {ko, kada} kad je štiklirano; zajednicki = da li baza odgovara
+  var stanje = {};
+  var zajednicki = false;
+  var mojeIme = citaj(KLJUC_IME) || "";
+  if (poljeIme) poljeIme.value = mojeIme;
+
+  function kadaTekst(kada){
+    if (!kada) return "";
+    var proslo = Date.now() - new Date(kada).getTime();
+    if (proslo < 0 || isNaN(proslo)) return "";
+    var min = Math.floor(proslo / 60000);
+    if (min < 1) return "upravo sad";
+    if (min < 60) return "pre " + min + " min";
+    var sati = Math.floor(min / 60);
+    if (sati < 24) return "pre " + sati + " h";
+    var dana = Math.floor(sati / 24);
+    return dana === 1 ? "juče" : "pre " + dana + " dana";
   }
 
-  var stanje = pamti ? citaj() : {};
+  function nacrtaj(){
+    var n = 0;
+    items.forEach(function(b){
+      var id = b.getAttribute("data-id");
+      var zapis = stanje[id];
+      b.setAttribute("aria-pressed", zapis ? "true" : "false");
+      var potpis = b.querySelector(".ko");
+      if (potpis){
+        if (zapis && zajednicki){
+          var delovi = [zapis.ko || "neko", kadaTekst(zapis.kada)].filter(Boolean);
+          potpis.textContent = delovi.join(" · ");
+          potpis.hidden = false;
+        } else {
+          potpis.hidden = true;
+        }
+      }
+      if (zapis) n++;
+    });
+    tally.textContent = n + " / " + items.length + " spremno";
+    reset.hidden = n === 0;
+  }
+
+  // --- zajednicki rezim: baza preko /api ---------------------------------
+  function ucitajSaServera(){
+    return fetch("/api/stanje", { headers: { "Accept": "application/json" } })
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function(o){
+        if (!o.ok) return Promise.reject(o.razlog);
+        stanje = o.stavke || {};
+        return true;
+      });
+  }
+
+  function posalji(id, cekirano){
+    return fetch("/api/stavka", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, cekirano: cekirano, ko: mojeIme })
+    }).then(function(r){ if (!r.ok) throw new Error(r.status); });
+  }
+
+  // --- lokalni rezim: localStorage ---------------------------------------
+  function ucitajLokalno(){
+    try { stanje = JSON.parse(citaj(KLJUC)) || {}; } catch (e) { stanje = {}; }
+    // stari zapis je bio {id: 1}; prevodimo ga u {id: {}}
+    Object.keys(stanje).forEach(function(k){
+      if (typeof stanje[k] !== "object") stanje[k] = {};
+    });
+  }
+  function sacuvajLokalno(){ if (pamti) pisi(KLJUC, JSON.stringify(stanje)); }
+
+  // --- klik --------------------------------------------------------------
   items.forEach(function(b){
-    var id = b.getAttribute("data-id");
-    if (stanje[id]) b.setAttribute("aria-pressed", "true");
     b.addEventListener("click", function(){
-      var cekirano = b.getAttribute("aria-pressed") !== "true";
-      b.setAttribute("aria-pressed", cekirano ? "true" : "false");
-      if (cekirano) stanje[id] = 1; else delete stanje[id];
-      if (pamti) pisi(stanje);
-      count();
+      var id = b.getAttribute("data-id");
+      var cekirano = !stanje[id];
+      if (cekirano) stanje[id] = { ko: mojeIme, kada: new Date().toISOString() };
+      else delete stanje[id];
+      nacrtaj();
+
+      if (zajednicki){
+        posalji(id, cekirano).catch(function(){
+          // server nije primio — vracamo prikaz i javljamo
+          ucitajSaServera().then(nacrtaj).catch(function(){});
+          saved.textContent = "Izmena nije sačuvana — proveri vezu.";
+        });
+      } else {
+        sacuvajLokalno();
+      }
     });
   });
 
   reset.addEventListener("click", function(){
-    items.forEach(function(b){ b.setAttribute("aria-pressed", "false"); });
+    if (zajednicki && !confirm("Ovo briše štiklirano svima, ne samo tebi. Nastaviti?")) return;
     stanje = {};
-    pisi(stanje);
-    count();
+    nacrtaj();
+    if (zajednicki){
+      fetch("/api/ponisti", { method: "POST" }).catch(function(){
+        ucitajSaServera().then(nacrtaj).catch(function(){});
+      });
+    } else {
+      sacuvajLokalno();
+    }
   });
 
-  if (pamti) saved.hidden = false;
-  count();
+  if (poljeIme){
+    poljeIme.addEventListener("input", function(){
+      mojeIme = poljeIme.value.trim().slice(0, 24);
+      pisi(KLJUC_IME, mojeIme);
+    });
+  }
+
+  // --- start: probamo bazu, pa lokalno ako je nema ------------------------
+  ucitajSaServera().then(function(){
+    zajednicki = true;
+    if (jaBox) jaBox.hidden = false;
+    saved.textContent = "Spisak je zajednički — svi vidite isto stanje. Potpiši se da ekipa zna ko je šta uzeo.";
+    saved.hidden = false;
+    nacrtaj();
+
+    // povremeno povlacimo tudje izmene, ali samo dok je stranica u prvom planu
+    setInterval(function(){
+      if (document.hidden) return;
+      ucitajSaServera().then(nacrtaj).catch(function(){});
+    }, 15000);
+    document.addEventListener("visibilitychange", function(){
+      if (!document.hidden) ucitajSaServera().then(nacrtaj).catch(function(){});
+    });
+  }).catch(function(){
+    zajednicki = false;
+    ucitajLokalno();
+    if (pamti){
+      saved.textContent = "Zajednički spisak nije dostupan — štiklirano se pamti samo na ovom uređaju.";
+      saved.hidden = false;
+    }
+    nacrtaj();
+  });
 })();
 </script>
 <!--/CONTENT-->
