@@ -12,7 +12,9 @@ const ROUTES = {
   "/index.html": { file: "index.html", type: "text/html; charset=utf-8", cache: "public, max-age=0, must-revalidate" },
   "/logo.png": { file: "logo.png", type: "image/png", cache: "public, max-age=604800" },
   "/logo.webp": { file: "logo.webp", type: "image/webp", cache: "public, max-age=604800" },
-  "/favicon.ico": { file: "logo.png", type: "image/png", cache: "public, max-age=604800" },
+  "/favicon.png": { file: "favicon.png", type: "image/png", cache: "public, max-age=604800" },
+  "/favicon.ico": { file: "favicon.png", type: "image/png", cache: "public, max-age=604800" },
+  "/apple-touch-icon.png": { file: "apple-touch-icon.png", type: "image/png", cache: "public, max-age=604800" },
 };
 
 const server = http.createServer((req, res) => {

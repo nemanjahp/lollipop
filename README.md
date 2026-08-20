@@ -33,6 +33,7 @@ zadaje, zajedno sa restartom pri padu.
 | --- | --- |
 | `index.html` | cela stranica — markup, CSS i JS u jednom fajlu |
 | `logo.png` / `logo.webp` | originalni znak, bela pozadina isečena da radi i na tamnoj temi |
+| `favicon.png`, `apple-touch-icon.png` | male ikonice za tab i prečicu na telefonu |
 | `server.js` | static server za Railway, bez zavisnosti |
 | `railway.json`, `package.json` | deploy konfiguracija |
 | `artifact.html` | ista stranica kao jedan fajl sa ugrađenim logom, za claude.ai Artifact |
