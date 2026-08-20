@@ -25,12 +25,17 @@ Repo je spreman kakav jeste:
 
 1. Na Railway-u: **New Project → Deploy from GitHub repo → `nemanjahp/lollipop`**
 2. Grana: `claude/sailing-boarding-counter-u5qoto` (ili `main` posle merge-a)
-3. U istom projektu: **New → Database → Add PostgreSQL**. Railway sam ubacuje
-   `DATABASE_URL` u servis, tabela se pravi pri prvom pokretanju
-4. **Settings → Networking → Generate Domain** za javni link
+3. U istom projektu: **New → Database → Add PostgreSQL**
+4. U servisu aplikacije otvori **Variables** i proveri da postoji `DATABASE_URL`.
+   Ako ga nema, dodaj ga kao referencu na bazu: `${{Postgres.DATABASE_URL}}`
+   (dodavanje baze u projekat ne znači uvek da je servis i vidi)
+5. **Settings → Networking → Generate Domain** za javni link
 
-`PORT` i `DATABASE_URL` Railway postavlja sam — ništa ne treba unositi ručno. Bez
-Postgresa aplikacija i dalje radi, samo spisak nije zajednički.
+`PORT` Railway postavlja sam. Tabela se pravi pri prvom povezivanju.
+
+Ako aplikacija startuje pre nego što se baza podigne, veza se ponavlja u pozadini
+(2 s, pa 4, 8, 16, najviše 30 s) dok ne uspe — restart nije potreban. U dnevniku
+tada piše `Baza spremna — spisak je zajednički.`
 
 Nixpacks prepoznaje `package.json` i pokreće `npm start`; `railway.json` to i eksplicitno
 zadaje, zajedno sa restartom pri padu.

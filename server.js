@@ -52,6 +52,18 @@ const pool = veza
     })
   : null;
 let bazaRadi = false;
+if (pool) {
+  pool.on("error", (e) => {
+    console.error("Veza sa bazom je pukla:", e.message);
+    bazaRadi = false;
+    pripremiBazu();
+  });
+}
+
+// Na prvom deploy-u Postgres ume da startuje sporije od aplikacije, pa se
+// povezivanje ponavlja u pozadini umesto da se odustane posle prvog pokušaja.
+let pokusaj = 0;
+let zakazano = null;
 
 async function pripremiBazu() {
   if (!pool) {
@@ -66,10 +78,24 @@ async function pripremiBazu() {
         kada  TIMESTAMPTZ NOT NULL DEFAULT now()
       )
     `);
+    if (!bazaRadi) console.log("Baza spremna — spisak je zajednički.");
     bazaRadi = true;
-    console.log("Baza spremna — spisak je zajednički.");
+    pokusaj = 0;
   } catch (e) {
-    console.error("Baza nije dostupna, spisak radi bez zajedničkog pamćenja:", e.message);
+    bazaRadi = false;
+    pokusaj++;
+    const zaCekanje = Math.min(30000, 2000 * 2 ** Math.min(pokusaj - 1, 4));
+    // Prvih par neuspeha je normalno dok se baza podiže; ne zatrpavamo dnevnik.
+    if (pokusaj === 1 || pokusaj % 10 === 0) {
+      console.error(`Baza nije dostupna (pokušaj ${pokusaj}): ${e.message}. Ponavljam za ${zaCekanje / 1000} s.`);
+    }
+    if (!zakazano) {
+      zakazano = setTimeout(() => {
+        zakazano = null;
+        pripremiBazu();
+      }, zaCekanje);
+      zakazano.unref();
+    }
   }
 }
 
@@ -185,9 +211,8 @@ const server = http.createServer((req, res) => {
   });
 });
 
-pripremiBazu().then(() => {
-  server.listen(PORT, "0.0.0.0", () => console.log(`Lollipop odbrojavanje sluša na portu ${PORT}`));
-});
+server.listen(PORT, "0.0.0.0", () => console.log(`Lollipop odbrojavanje sluša na portu ${PORT}`));
+pripremiBazu();
 
 for (const signal of ["SIGTERM", "SIGINT"]) {
   process.on(signal, () =>
