@@ -45,13 +45,24 @@ zadaje, zajedno sa restartom pri padu.
 python3 tools/build-artifact.py
 ```
 
+## Pamćenje štikliranog
+
+Svaki posetilac ima svoj spisak: štiklirano se čuva u `localStorage` pregledača, pod
+ključem `lollipop-spisak-v1`, kao mapa `data-id → 1`. Pamti se po `data-id` stavke, ne po
+rednom broju, pa dodavanje, brisanje i prepravka teksta ne pomeraju već štiklirano.
+
+Ako je `localStorage` nedostupan (privatni režim, ugrađen okvir, isključeni kolačići),
+spisak radi normalno samo bez pamćenja — napomena i dugme „Poništi sve" se tada ne prikazuju.
+
+Za promenu koja treba da poništi sve svima, podigni verziju ključa na `lollipop-spisak-v2`.
+
 ## Šta se lako menja
 
 | Šta | Gde |
 | --- | --- |
 | Datum i vreme ukrcavanja | `TARGET` u `<script>` na dnu, plus tekst u `.stamp`, `.facts` i footeru |
 | Marina i brod | `.facts` blokovi `Marina` i `Brod` |
-| Spisak za pakovanje | `<ul class="list">` |
+| Spisak za pakovanje | `<ul class="list">` — svaka stavka ima `data-id` po kom se pamti štikliranje |
 | Pravila palube | `<ol class="rules">` |
 | Link ka skripti | `<a class="doc">` u sekciji „Za buduće skipere" |
 | Boje | CSS promenljive u `:root` (svetla) i `:root[data-theme="dark"]` (tamna tema) |
